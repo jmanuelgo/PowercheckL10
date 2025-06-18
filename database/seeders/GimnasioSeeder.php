@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Gimnasio;
 
 class GimnasioSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class GimnasioSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Gimnasio::factory()->count(20)->create();
     }
 }

@@ -10,9 +10,23 @@ class GimnasioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->query('search');
+
+        $gimnasios = Gimnasio::query()
+            ->when(
+                $search,
+                fn($query) =>
+                $query->where('nombre', 'like', '%' . $search . '%')
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        if ($request->wantsJson()) {
+            return response()->json($gimnasios);
+        }
+
+        return view('admin.gimnasios', compact('gimnasios'));
     }
 
     /**
@@ -20,7 +34,7 @@ class GimnasioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create_gimnasio');
     }
 
     /**

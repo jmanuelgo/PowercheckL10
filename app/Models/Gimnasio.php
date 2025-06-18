@@ -12,8 +12,9 @@ class Gimnasio extends Model
     protected $fillable = [
         'nombre',
         'ubicacion',
-        'logo',
         'celular',
+        'logo',
+
     ];
     protected $casts = [
         'created_at' => 'datetime',

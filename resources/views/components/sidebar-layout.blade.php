@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>PowerCheck - Panel</title>
+    <title>{{ $title ?? 'PowerCheck - Panel' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -101,8 +101,16 @@
 
 
     <!-- MAIN CONTENT -->
-    <main class="flex-1 p-6 ">
-        {{ $slot }}
+<main class="flex-1 p-6 space-y-4">
+        @isset($header)
+            <header class="border-b border-zinc-700 pb-4">
+                {{ $header }}
+            </header>
+        @endisset
+
+        <section>
+            {{ $slot }}
+        </section>
     </main>
 
 </body>

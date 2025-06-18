@@ -12,7 +12,7 @@ $links = [
     [
         'name' => 'Gimnasios',
         'url' => route('admin.gimnasios'),
-        'active' => request()->routeIs('admin.gimnasios.*'),
+        'active' => request()->routeIs('admin.gimnasios*'),
         'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M9 17v-2a4 4 0 014-4h2a4 4 0 014 4v2M3 13h2l.894 2.236a2 2 0 001.788 1.264H8M21 13h-2l-.894 2.236a2 2 0 01-1.788 1.264H16" />
@@ -21,28 +21,25 @@ $links = [
     [
         'name' => 'Entrenadores',
         'url' => route('admin.entrenadores'),
-        'active' => request()->routeIs('admin.entrenadores.*'),
-        'icon'=>'<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        'active' => request()->routeIs('admin.entrenadores*'),
+        'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.248.713 5.879 1.804M15 11a3 3 0 10-6 0 3 3 0 006 0z" />
         </svg>',
     ],
 ];
 ?>
-<x-sidebar-layout :links="$links" title="Dashboard - PowerCheck">
+<x-sidebar-layout :links="$links" title="Gimnasios - PowerCheck">
     <x-slot name="header">
-        
-        <h1 class="text-2xl font-bold mb-2">Bienvenido, {{ Auth::user()->name }}</h1>
+        <h1 class="text-2xl font-bold mb-2">Gestión de Gimnasios</h1>
         <p class="text-sm text-text-primary">
-            Desde aquí puedes gestionar gimnasios, entrenadores y más.
+            Aquí puedes ver todos los gimnasios registrados en la plataforma.
         </p>
     </x-slot>
-
-    {{-- Contenido principal --}}
-    <div class="mt-4">
-        <p class="text-base">Este es tu panel principal.</p>
+    <div class="mb-4">
+        <input type="text" id="search" placeholder="Buscar gimnasio..."
+            class="px-4 py-2 border rounded w-full text-black">
+    </div>
+    <div id="gym-table">
+        @include('admin.partials.table_gimnasios', ['gimnasios' => $gimnasios])
     </div>
 </x-sidebar-layout>
-
-
-
-

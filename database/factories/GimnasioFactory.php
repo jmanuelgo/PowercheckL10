@@ -17,7 +17,11 @@ class GimnasioFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+        'nombre' => $this->faker->company . ' Gym',
+        'ubicacion' => $this->faker->address,
+        'logo' => $this->faker->unique()->safeEmail,
+        'celular' => $this->faker->phoneNumber,
+
         ];
     }
 }
