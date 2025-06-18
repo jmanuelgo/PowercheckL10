@@ -5,3 +5,50 @@
 [x-cloak] {
     display: none;
 }
+
+/* ✅ Variables personalizadas y clases adicionales */
+:root {
+  --primary-color: #010626;
+  --secundary-color: #2e3453;
+  --text-color: #ebeeff;
+  --button-color: #d0a617;
+  --button-hover: #b88d10;
+  --font-family-base: 'Helvetica Neue', sans-serif;
+  --font-family-button: 'Roboto', sans-serif;
+}
+
+.bg-color-primary {
+  background-color: var(--primary-color);
+}
+
+.text-text-primary {
+  color: var(--text-color) !important;
+}
+
+.bg-color-secundary {
+  background-color: var(--secundary-color);
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: var(--font-family-base);
+}
+
+.btn-colorprimary {
+  background-color: var(--button-color);
+  color: #fff;
+  font-family: var(--font-family-button);
+  font-weight: 500;
+  border: none;
+  border-radius: 0.75rem; /* rounded-lg */
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-colorprimary:hover {
+  background-color: var(--button-hover);
+}
+
