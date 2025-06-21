@@ -35,11 +35,34 @@ $links = [
             Aquí puedes ver todos los gimnasios registrados en la plataforma.
         </p>
     </x-slot>
+
     <div class="mb-4">
-        <input type="text" id="search" placeholder="Buscar gimnasio..."
-            class="px-4 py-2 border rounded w-full text-black">
+        <input type="text" id="search" placeholder="Buscar gimnasio..." class="px-4 py-2 border rounded w-full text-black">
     </div>
-    <div id="gym-table">
-        @include('admin.partials.table_gimnasios', ['gimnasios' => $gimnasios])
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full text-sm bg-white text-black rounded shadow">
+            <thead class="bg-zinc-800 text-white">
+                <tr>
+                    <th class="px-4 py-2">Nombre</th>
+                    <th class="px-4 py-2">Dirección</th>
+                    <th class="px-4 py-2">Celular</th>
+                    <th class="px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+
+            {{-- ESTE DIV CAMBIA VIA AJAX --}}
+            <tbody id="gym-table">
+                @include('admin.partials.table_gimnasios', ['gimnasios' => $gimnasios])
+            </tbody>
+        </table>
+        <div id="gym-pagination" class="mt-4">
+         {{ $gimnasios->links() }}
+        </div>
+            <a href="{{ route('admin.gimnasios.create') }}"
+       class="bg-button-color hover:bg-button-hover text-white font-semibold px-4 py-2 rounded-lg transition">
+        + Nuevo Gimnasio
+    </a>
     </div>
 </x-sidebar-layout>
+

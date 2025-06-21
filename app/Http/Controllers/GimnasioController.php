@@ -10,24 +10,25 @@ class GimnasioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $search = $request->query('search');
+public function index(Request $request)
+{
+    $search = $request->query('search');
 
-        $gimnasios = Gimnasio::query()
-            ->when(
-                $search,
-                fn($query) =>
-                $query->where('nombre', 'like', '%' . $search . '%')
-            )
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-        if ($request->wantsJson()) {
-            return response()->json($gimnasios);
-        }
+    $gimnasios = Gimnasio::query()
+        ->when($search, fn($query) =>
+            $query->where('nombre', 'like', '%' . $search . '%')
+        )
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
-        return view('admin.gimnasios', compact('gimnasios'));
+    if ($request->ajax()) {
+        return view('admin.partials.table_gimnasios', compact('gimnasios'))->render();
     }
+
+    return view('admin.gimnasios', compact('gimnasios'));
+}
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +43,21 @@ class GimnasioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $validated = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'ubicacion' => 'required|string|max:255',
+        'celular' => 'required|string|max:20',
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ]);
+
+    if ($request->hasFile('logo')) {
+        $path = $request->file('logo')->store('logos', 'public');
+        $validated['logo'] = $path;
+    }
+
+    Gimnasio::create($validated);
+
+    return redirect()->route('admin.gimnasios')->with('success', 'Gimnasio creado exitosamente.');
     }
 
     /**

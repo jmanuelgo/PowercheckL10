@@ -16,6 +16,16 @@ class RoleSeeder extends Seeder
         $entrenadorRole = Role::create(['name' => 'entrenador']);
         $atletaRole = Role::create(['name' => 'atleta']);
 
+        Permission::create(['name' => 'admin.admindashboard'])->assignRole($adminRole);
+        Permission::create(['name'=> 'admin.gimnasios'])->assignRole($adminRole);
+        Permission::create(['name'=> 'admin.gimnasios.create'])->assignRole($adminRole);
+        Permission::create(['name'=> 'admin.gimnasios.edit'])->assignRole($adminRole);
+        Permission::create(['name'=> 'admin.gimnasios.destroy'])->assignRole($adminRole);
+
+        // Entrenadores
+        Permission::create(['name'=> 'admin.entrenadores'])->assignRole($adminRole);
+
+
         $admin = User::firstOrCreate(
             ['email' => 'admin@demo.com'],
             [

@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Gimnasio;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Laravel\Jetstream\Rules\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+        RoleSeeder::class,
         GimnasioSeeder::class,
     ]);
 
