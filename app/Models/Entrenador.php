@@ -20,7 +20,7 @@ class Entrenador extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function gimnacio()
+    public function gimnasio()
     {
         return $this->belongsTo(Gimnasio::class);
     }

@@ -47,7 +47,7 @@
             <!-- Dropdown hacia ABAJO -->
             <div x-show="open" @click.outside="open = false" x-transition
                 class="absolute top-full mt-2 left-0 w-full bg-white text-zinc-800 rounded-lg shadow-lg z-50 overflow-hidden">
-                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm hover:bg-zinc-100 transition">
+                <a href="{{ route('admin.configuracion') }}" class="block px-4 py-2 text-sm hover:bg-zinc-100 transition">
                     Configuración
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -88,7 +88,7 @@
 
             <div x-show="open" @click.away="open = false" x-transition
                 class="absolute bottom-12 left-1/2 -translate-x-1/2 w-40 bg-zinc-900 text-white rounded-lg shadow-md z-50">
-                <a href="{{ route('profile.show') }}"
+                <a href="{{ route('admin.configuracion') }}"
                     class="block px-4 py-2 hover:bg-zinc-700 text-sm text-center">Configuración</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -101,12 +101,30 @@
 
 
     <!-- MAIN CONTENT -->
-<main class="flex-1 p-6 space-y-4">
+    <main class="flex-1 p-6 space-y-4">
         @isset($header)
             <header class="border-b border-zinc-700 pb-4">
                 {{ $header }}
             </header>
         @endisset
+        @if (session('success'))
+            <div class="p-4 mb-4 rounded-lg border border-green-300 bg-green-100 text-green-800 shadow">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2l4 -4m2 4a9 9 0 11-18 0a9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-sm font-medium">{{ session('success') }}</span>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()"
+                        class="text-green-600 hover:text-green-800 text-sm font-bold">
+                        ×
+                    </button>
+                </div>
+            </div>
+        @endif
 
         <section>
             {{ $slot }}
