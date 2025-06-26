@@ -85,4 +85,12 @@ class User extends Authenticatable
     {
         $this->attributes['apellidos'] = ucwords(strtolower(trim($valor)));
     }
+    public function entrenador()
+    {
+        return $this->hasOne(Entrenador::class);
+    }
+    public function atleta()
+    {
+        return $this->hasOne(Atleta::class);
+    }
 }

@@ -31,9 +31,9 @@ class AuthController extends Controller
             if ($user->hasRole('admin')) {
                 return redirect()->intended('/admin/dashboard');
             } elseif ($user->hasRole('entrenador')) {
-                return redirect()->intended('/entrenador/inicio');
+                return redirect()->intended('/entrenador/dashboard');
             } elseif ($user->hasRole('atleta')) {
-                return redirect()->intended('/atleta/perfil');
+                return redirect()->intended('/atleta/dashboard');
             }
 
             // Si no tiene rol

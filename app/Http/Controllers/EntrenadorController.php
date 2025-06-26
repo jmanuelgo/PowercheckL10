@@ -74,7 +74,7 @@ class EntrenadorController extends Controller
             'email' => $request->email,
             'apellidos' => $request->apellidos,
             'password' => Hash::make($password),
-            'celular' => $request->telefono,
+            'celular' => $request->celular,
         ]);
 
         $user->assignRole('entrenador');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Atleta extends Model
 {
-        use HasFactory;
+    use HasFactory;
     protected $table = 'atletas';
     protected $fillable = [
         'user_id',
@@ -20,24 +20,28 @@ class Atleta extends Model
         'estilo_vida',
         'lesiones_previas',
     ];
-        protected $casts = [
+    protected $casts = [
         'fecha_nacimiento' => 'date',
         'altura' => 'decimal:2',
     ];
-        public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-        public function entrenador()
+    public function entrenador()
     {
         return $this->belongsTo(Entrenador::class);
     }
-        public function gimnasio()
+    public function gimnasio()
     {
         return $this->belongsTo(Gimnasio::class);
     }
     public function historialPesos()
     {
         return $this->hasMany(HistorialPeso::class);
+    }
+    public function getEdadAttribute()
+    {
+        return $this->fecha_nacimiento ? now()->year - $this->fecha_nacimiento->year : null;
     }
 }

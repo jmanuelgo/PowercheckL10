@@ -39,6 +39,14 @@ public function boot(): void
             ->prefix('admin')
             ->name('admin.')
             ->group(base_path('routes/admin.php'));
+        Route::middleware('web')
+            ->prefix('entrenador')
+            ->name('entrenador.')
+            ->group(base_path('routes/entrenador.php'));
+        Route::middleware('web')
+            ->prefix('atleta')
+            ->name('atleta.')
+            ->group(base_path('routes/atleta.php'));
     });
 }
 
